@@ -1,0 +1,64 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.1.1
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    pss-gitlab.math.univ-paris-diderot.fr/dralucas/shaltoplib:
+      branch: main
+      repo: https://pss-gitlab.math.univ-paris-diderot.fr/dralucas/shaltoplib.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      pss-gitlab.math.univ-paris-diderot.fr/dralucas/shaltoplib git:
+        commands:
+        - /usr/bin/env sh .sqa/script.skimpy-green-earwig.sh
+        container: qc.acc_wimpy-ochre-shrew
+  QC.Doc:
+    repos:
+      pss-gitlab.math.univ-paris-diderot.fr/dralucas/shaltoplib find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-saffron-dogfish.sh
+        container: qc.doc_chummy-russet-devil
+      pss-gitlab.math.univ-paris-diderot.fr/dralucas/shaltoplib git:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-lilac-centipede.sh
+        container: qc.doc_squeaky-cream-owl
+      pss-gitlab.math.univ-paris-diderot.fr/dralucas/shaltoplib markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.ugly-beige-albatross.sh
+        container: qc.doc_wheezy-rust-crab
+  QC.Lic:
+    repos:
+      pss-gitlab.math.univ-paris-diderot.fr/dralucas/shaltoplib licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-ochre-bulldog.sh
+        container: qc.lic_lovely-firebrick-heron
+  QC.Sec:
+    repos:
+      pss-gitlab.math.univ-paris-diderot.fr/dralucas/shaltoplib bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-peach-chinchilla.sh
+        container: qc.sec_nippy-thistle-reindeer
+  QC.Sty:
+    repos:
+      pss-gitlab.math.univ-paris-diderot.fr/dralucas/shaltoplib flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloudy-champagne-robin.sh
+        container: qc.sty_cheeky-smalt-fish
+  QC.Uni:
+    repos:
+      pss-gitlab.math.univ-paris-diderot.fr/dralucas/shaltoplib pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-pumpkin-falcon.sh
+        container: qc.uni_paltry-sangria-schnauzer
+  QC.Ver:
+    repos:
+      pss-gitlab.math.univ-paris-diderot.fr/dralucas/shaltoplib get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-mauve-flamingo.sh
+        container: qc.ver_pretty-thistle-affenpinscher
+timeout: 5400
